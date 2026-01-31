@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Assistant — DeepSeek Style</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-header">
+      <h1>AI Assistant</h1>
+      <p>Ваш умный помощник на основе ИИ</p>
+    </div>
+
+    <div id="chat-messages" class="chat-messages">
+      <!-- Сообщения будут появляться здесь -->
+    </div>
+
+    <div class="input-area">
+      <textarea
+        id="user-input"
+        placeholder="Поле ввода"
+        rows="1"
+        maxlength="1000"
+      ></textarea>
+      <button id="send-btn">➤</button>
+    </div>
+  </div>
+
+  <script>
+    async function отправитьСообщение() {
+      const текстПользователя = document.getElementById("user-input").value;
+      if (!текстПользователя.trim()) return;
+
+      try {
+        const ответСервера = await fetch("https://api.deepseek.com/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "sk-5cb04ed1e7324c12a3aaab46c10ff3e2"
+          },
+          body: JSON.stringify({
+            model: "deepseek-chat",
+            messages: [
+              { role: "system", content: "Ты ассистент и отвечаешь позитивно, как дотер." },
+              { role: "user", content: текстПользователя }
+            ]
+          })
+        });
+
+        const данные = await ответСервера.json();
+        const ответ = данные.choices[0].message.content;
+
+
+        const chatBox = document.getElementById("chat-messages");
+        chatBox.innerHTML += `<div><strong>Вы:</strong> ${текстПользователя}</div>`;
+        chatBox.innerHTML += `<div><strong>AI:</strong> ${ответ}</div>`;
+        document.getElementById("user-input").value = "";
+      } catch (ошибка) {
+        console.error("Ошибка:", ошибка);
+        document.getElementById("chat-messages").innerHTML += `<div style="color:red;">Ошибка: не удалось получить ответ.</div>`;
+      }
+    }
+
+    // Привязка к кнопке
+    document.getElementById("send-btn").addEventListener("click", отправитьСообщение);
+
+    document.getElementById("user-input").addEventListener("keypress", (e) => {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        отправитьСообщение();
+      }
+    });
+  </script>
+</body>

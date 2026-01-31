@@ -1,0 +1,25 @@
+body{
+    background: blue;
+    color:black;
+    text-align: center;
+}
+
+table{
+    margin: auto;
+    border-collapse: collapse;
+    background: aqua;
+}
+
+th, td {
+padding: 10px 16px;
+}
+
+th {
+background: chartreuse;
+color: blueviolet;
+}
+
+th:hover{
+    background: coral;
+    transform: scale(1.15);
+}

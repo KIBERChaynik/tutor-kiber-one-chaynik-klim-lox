@@ -1,0 +1,57 @@
+body {
+font-family: Arial, Helvetica, sans-serif;
+background-color: rgb(255, 255, 255);
+color:#333;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 900px;
+flex-direction: column;
+background-image: -moz-radial-gradient(1);
+background-size: cover;
+background-position:center ;
+}
+
+/* Заголовок страницы */
+h1 {
+  font-size: 32px; /* Размер текста заголовка в пикселях */
+  color: #0b55a5; /* Белый цвет текста для контраста с фоном */
+}
+
+
+/* Контейнер галереи */
+.gallery {
+  display: grid; /* Включаем grid-сетку для картинок */
+  grid-template-columns: repeat(auto-fill, 250px); /* Колонки фиксированной ширины 250px, автоматически добавляются новые */
+  gap: 20px; /* Расстояние между карточками 20px */
+  padding: 20px; /* Отступы внутри галереи 20px */
+  max-width: 1000px; /* Максимальная ширина галереи 1000px */
+  width: 100%; /* Ширина галереи на 100% от родителя */
+}
+
+
+/* Стиль каждой карточки с картинкой */
+.card {
+  position: relative; /* Для позиционирования элементов внутри карточки */
+  border-radius: 10px; /* Скругленные углы 10px */
+  overflow: hidden; /* Все, что выходит за рамки карточки, скрывается */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Тень под карточкой */
+  background: #fff; /* Белый фон карточки */
+  transition: transform 0.3s ease; /* Плавное увеличение при наведении */
+}
+
+
+/* Эффект наведения на карточку */
+.card:hover {
+  transform: scale(2.05); /* Легкое увеличение карточки на 5% */
+}
+
+
+/* Изображение внутри карточки */
+.card img {
+  width: 250px; /* Фиксированная ширина 250px */
+  height: 180px; /* Фиксированная высота 180px */
+  object-fit: cover; /* Изображение заполняет блок без искажений */
+  border-radius: 10px; /* Скругляем углы изображения под карточку */
+}
+
